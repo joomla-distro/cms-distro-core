@@ -58,6 +58,7 @@ class BaseInstaller extends LibraryInstaller
      */
     public function getInstallPath(PackageInterface $package)
     {
+        $this->findFrameworkType($this->_type);
         return $this->framework->getLocation($package);
     }
 
@@ -153,11 +154,15 @@ class BaseInstaller extends LibraryInstaller
         $parts = explode('/', $package->getName());
         $this->vars['vendor'] = $parts[0];
         $this->vars['package'] = $parts[1];
-        $location = $this->location;
-        foreach ($this->vars as $find => $replace) {
-            $location = str_replace('{'.$find.'}',$replace,$location);
+
+        $keys = array_keys($this->vars);
+        //add regex {key}
+        foreach ($keys as $i => $key) {
+            $keys[$i] = sprintf('/{%s}/',$key);
         }
-        
+
+        $location = preg_replace($keys,array_values($this->vars),$this->location);
+
         return $location;
     }
 

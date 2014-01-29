@@ -22,7 +22,12 @@ class Installer implements PluginInterface
     public function activate(Composer $composer, IOInterface $io)
     {
         $installer = new BaseInstaller($io, $composer);
-
         $composer->getInstallationManager()->addInstaller($installer);
+        // add adapter
+        foreach (glob(__DIR__.'/Adapter/*.php') as $path) {
+            $class_name = __NAMESPACE__ . '\\Adapter\\' . basename($path,'.php');
+            $installer = new $class_name($io, $composer);
+            $composer->getInstallationManager()->addInstaller($installer);
+        }
     }
 }
