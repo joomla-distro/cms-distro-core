@@ -22,7 +22,7 @@ class CmsApplicationInstaller extends BaseInstaller
     {
         // Example vendor/cms-installation-application, cms-administrator-application, cms-frontend-application
         $parts = explode('/', $package->getName());
-        $vars - explode('-', $parts[1]);
+        $vars = explode('-', $parts[1]);
         $this->vars['application'] = $vars[1];
 
     	return parent::getLocation($package);
