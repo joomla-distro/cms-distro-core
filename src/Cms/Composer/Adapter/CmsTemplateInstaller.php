@@ -5,14 +5,14 @@ use Cms\Composer\BaseInstaller;
 use Composer\Package\PackageInterface;
 
 /**
- * Cms Application Installer class
+ * Cms Template Installer class
  *
  * @author  Julio Pontes <https://github.com/juliopontes>
  * @package Cms\Composer\Adapter
  */
-class CmsApplicationInstaller extends BaseInstaller
+class CmsTemplateInstaller extends BaseInstaller
 {
-    protected $location = 'app/{application}';
+    protected $location = 'www/templates/{template}';
 
     /**
      * Return string path
@@ -20,10 +20,10 @@ class CmsApplicationInstaller extends BaseInstaller
      */
     protected function getLocation(PackageInterface $package)
     {
-        // Example vendor/cms-installation-application, cms-administrator-application, cms-frontend-application
+        // Example vendor/cms-isis-template
         $parts = explode('/', $package->getName());
         $vars - explode('-', $parts[1]);
-        $this->vars['application'] = $vars[1];
+        $this->vars['template'] = $vars[1];
 
     	return parent::getLocation($package);
     }
