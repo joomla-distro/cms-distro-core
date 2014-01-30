@@ -24,7 +24,7 @@ class CmsTemplateInstaller extends BaseInstaller
         // Example vendor/cms-isis-template
         $parts = explode('/', $package->getName());
         $vars = explode('-', $parts[1]);
-        $this->vars['template'] = $vars[1];
+        $this->vars['template'] = trim($vars[1]);
 
     	return parent::getLocation($package);
     }
