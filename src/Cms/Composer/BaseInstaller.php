@@ -108,7 +108,7 @@ class BaseInstaller extends LibraryInstaller
             $keys[$i] = sprintf('/{%s}/',$key);
         }
 
-        $location = preg_replace($keys,array_values($this->vars),$this->location).chr(13);
+        $location = preg_replace($keys,array_values($this->vars),$this->location);
 
         return $location;
     }
