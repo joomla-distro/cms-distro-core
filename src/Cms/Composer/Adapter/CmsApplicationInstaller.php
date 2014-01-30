@@ -13,6 +13,7 @@ use Composer\Package\PackageInterface;
 class CmsApplicationInstaller extends BaseInstaller
 {
     protected $location = 'app/{application}';
+    protected $support = 'cms-application';
 
     /**
      * Return string path

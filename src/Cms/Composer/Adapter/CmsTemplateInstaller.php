@@ -13,6 +13,7 @@ use Composer\Package\PackageInterface;
 class CmsTemplateInstaller extends BaseInstaller
 {
     protected $location = 'www/templates/{template}';
+    protected $support = 'cms-template';
 
     /**
      * Return string path
