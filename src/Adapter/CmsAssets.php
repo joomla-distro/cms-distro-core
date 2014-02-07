@@ -5,13 +5,13 @@ use Cms\Composer\BaseInstaller;
 use Composer\Package\PackageInterface;
 
 /**
- * Cms Media Installer class
+ * Cms Assets Installer class
  *
  * @author  Julio Pontes <https://github.com/juliopontes>
  * @package Cms\Composer\Adapter
  */
-class CmsMediaInstaller extends BaseInstaller
+class CmsAssets extends BaseInstaller
 {
-    protected $location = 'www/media/{vendor}/{package}';
-    protected $support = 'cms-media';
+    protected $location = 'assets/{vendor}/{package}';
+    protected $support = 'cms-assets';
 }
