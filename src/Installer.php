@@ -28,7 +28,7 @@ class Installer implements PluginInterface
 
         $composer_installers = $config->get('cms-package-installer');
 
-        $local_config = json_decode(file_get_contents(dirname(__DIR__) . '/src/packages.json', true);
+        $local_config = json_decode(file_get_contents(dirname(__DIR__) . '/src/packages.json'), true);
         $local_installers = $local_config['config']['cms-package-installer'];
 
         // merge to package list
