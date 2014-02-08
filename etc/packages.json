@@ -1,0 +1,14 @@
+{
+    "config": {
+        "cms-package-installer": [
+            {
+                "type": "cms-templates",
+                "location": "templates/{vendor}/{package}"
+            },
+            {
+                "type": "cms-assets",
+                 "location": "assets/{vendor}/{package}"
+            }
+        ]
+    }
+}

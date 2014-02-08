@@ -13,10 +13,10 @@
         }
     ],
     "autoload": {
-        "psr-4": {"Cms\\Composer": "src/"}
+        "psr-4": {"JDistro\\Composer": "src/"}
     },
     "extra": {
-        "class": "Cms\\Composer\\Installer"
+        "class": "JDistro\\Composer\\Installer"
     },
     "require": {
         "composer-plugin-api": "1.0.0"

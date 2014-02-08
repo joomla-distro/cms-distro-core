@@ -1,5 +1,5 @@
 <?php
-namespace Cms\Composer;
+namespace JDistro\Composer;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;
@@ -11,7 +11,7 @@ use Composer\Installer\LibraryInstaller;
  * Codebase installer class
  *
  * @author  Julio Pontes <https://github.com/juliopontes>
- * @package Cms\Composer
+ * @package JDistro\Composer
  */
 class BaseInstaller extends LibraryInstaller
 {
@@ -28,7 +28,7 @@ class BaseInstaller extends LibraryInstaller
     /**
      * String with type
      */
-    protected $support     = '';
+    protected $support      = '';
 
     /**
      * Composer Config
@@ -38,7 +38,7 @@ class BaseInstaller extends LibraryInstaller
     /**
      * {@inheritDoc}
      */
-    public function __construct(IOInterface $io, Composer $composer, $type = 'library')
+    public function __construct(IOInterface $io, Composer $composer, $config = array(), $type = 'library')
     {
         parent::__construct($io, $composer, $type);
 
@@ -46,6 +46,14 @@ class BaseInstaller extends LibraryInstaller
         $this->_composer = $composer;
         $this->_type = $type;
         $this->_config = $composer->getConfig();
+
+        if (!empty($config['support']) && empty($this->support)) {
+            $this->support = $data['support'];
+        }
+
+        if (!empty($config['location']) && is_null($this->location)) {
+            $this->location = $config['location'];
+        }
     }
 
     /**
@@ -61,10 +69,14 @@ class BaseInstaller extends LibraryInstaller
      */
     public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
+        if (method_exists($this, 'onBeforeInstall')) {
+            $this->onBeforeInstall($repo, $package);
+        }
+
         parent::install($repo, $package);
 
-        if (method_exists($this, 'customInstall')) {
-            $this->customInstall($repo, $package);
+        if (method_exists($this, 'onAfterInstall')) {
+            $this->onAfterInstall($repo, $package);
         }
     }
 
@@ -73,10 +85,14 @@ class BaseInstaller extends LibraryInstaller
      */
     public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
     {
+        if (method_exists($this, 'onBeforeUpdate')) {
+            $this->onBeforeUpdate($package->getPrettyVersion($repo, $initial, $target));
+        }
+
         parent::update($repo, $initial, $target);
 
-        if (method_exists($this, 'customUpdate')) {
-            $this->customUpdate($package->getPrettyVersion($repo, $initial, $target));
+        if (method_exists($this, 'onAfterUpdate')) {
+            $this->onAfterUpdate($package->getPrettyVersion($repo, $initial, $target));
         }
     }
 
