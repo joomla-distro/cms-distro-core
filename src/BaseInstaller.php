@@ -8,7 +8,7 @@ use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Installer\LibraryInstaller;
 
 /**
- * Codebase installer class
+ * Base installer class
  *
  * @author  Julio Pontes <https://github.com/juliopontes>
  * @package JDistro\Composer

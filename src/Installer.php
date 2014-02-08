@@ -46,13 +46,16 @@ class Installer implements PluginInterface
         $packages = array_merge($local_array, $composer_array);
 
         foreach ($packages as $package) {
-            if ((isset($package['type']) || array_key_exists('type', $package)) && (isset($package['location']) || array_key_exists('location', $package))) {
+            if (isset($package['type']) || array_key_exists('type', $package)) {
                 $class_config = array();
                 $class_exists = isset($package['class']) || array_key_exists('class', $package);
                 $class_name   = $class_exists ? __NAMESPACE__ . '\\Package\\' . $package['class'] : __NAMESPACE__ . '\\BaseInstaller' ;
 
                 // Setup class config with custom settings
                 if ($class_name == __NAMESPACE__ . '\\BaseInstaller') {
+                    if (!isset($package['location'])) {
+                        continue;
+                    }
                     $class_config = $package;
                 }
 
