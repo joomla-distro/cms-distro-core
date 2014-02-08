@@ -38,7 +38,7 @@ class Installer implements PluginInterface
             if ((isset($package['type']) || array_key_exists('type', $package)) && (isset($package['location']) || array_key_exists('location', $package))) {
                 $class_config = array();
                 $class_exists = isset($package['class']) || array_key_exists('class', $package);
-                $class_name   = $class_exists ? __NAMESPACE__ . '\\Package\\' . $package['class'] : 'BaseInstaller' ;
+                $class_name   = $class_exists ? __NAMESPACE__ . '\\Package\\' . $package['class'] : __NAMESPACE__ . '\\BaseInstaller' ;
 
                 // Setup class config with custom settings
                 if ($class_name == 'BaseInstaller') {
