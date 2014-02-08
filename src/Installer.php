@@ -35,7 +35,7 @@ class Installer implements PluginInterface
         $packages = array_merge($composer_installers, $local_installers);
 
         foreach ($packages as $package) {
-            if ((isset($package['type']) || array_key_exists('type', $package)) && ((isset($package['location']) || array_key_exists('location', $package))) {
+            if ((isset($package['type']) || array_key_exists('type', $package)) && (isset($package['location']) || array_key_exists('location', $package))) {
                 $class_config = array();
                 $class_exists = isset($package['class']) || array_key_exists('class', $package);
                 $class_name   = $class_exists ? __NAMESPACE__ . '\\Package\\' . $package['class'] : 'BaseInstaller' ;
