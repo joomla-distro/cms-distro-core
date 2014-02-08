@@ -32,7 +32,18 @@ class Installer implements PluginInterface
         $local_installers = $local_config['config']['cms-package-installer'];
 
         // merge to package list
-        $packages = array_merge($composer_installers, $local_installers);
+        if (!empty($composer_installers)) {
+            $local_array = array();
+            foreach ($local_installers as $local_installer) {
+                $local_array[$local_installer['type']] = $local_installer;
+            }
+            $composer_array = array();
+            foreach ($composer_installers as $composer_installer) {
+                $composer_array[$composer_installer['type']] = $composer_installer;     
+            }
+        }
+
+        $packages = array_merge($local_array, $composer_array);
 
         foreach ($packages as $package) {
             if ((isset($package['type']) || array_key_exists('type', $package)) && (isset($package['location']) || array_key_exists('location', $package))) {
@@ -41,7 +52,7 @@ class Installer implements PluginInterface
                 $class_name   = $class_exists ? __NAMESPACE__ . '\\Package\\' . $package['class'] : __NAMESPACE__ . '\\BaseInstaller' ;
 
                 // Setup class config with custom settings
-                if ($class_name == 'BaseInstaller') {
+                if ($class_name == __NAMESPACE__ . '\\BaseInstaller') {
                     $class_config = $package;
                 }
 

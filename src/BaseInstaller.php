@@ -47,8 +47,8 @@ class BaseInstaller extends LibraryInstaller
         $this->_type = $type;
         $this->_config = $composer->getConfig();
 
-        if (!empty($config['support']) && empty($this->support)) {
-            $this->support = $data['support'];
+        if (!empty($config['type']) && empty($this->support)) {
+            $this->support = $config['type'];
         }
 
         if (!empty($config['location']) && is_null($this->location)) {
