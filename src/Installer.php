@@ -49,7 +49,7 @@ class Installer implements PluginInterface
             if (isset($package['type']) || array_key_exists('type', $package)) {
                 $class_config = array();
                 $class_exists = isset($package['class']) || array_key_exists('class', $package);
-                $class_name   = $class_exists ? 'JDistro\\Package\\' . $package['class'] : __NAMESPACE__ . '\\BaseInstaller' ;
+                $class_name   = $class_exists ? $package['class'] : __NAMESPACE__ . '\\BaseInstaller' ;
 
                 // Setup class config with custom settings
                 if ($class_name == __NAMESPACE__ . '\\BaseInstaller') {
