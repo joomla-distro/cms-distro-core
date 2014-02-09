@@ -33,7 +33,7 @@ class BaseInstaller extends LibraryInstaller
     /**
      * Composer Config
      */
-    protected $_config      = null;
+    protected $config      = null;
 
     /**
      * {@inheritDoc}
@@ -42,10 +42,7 @@ class BaseInstaller extends LibraryInstaller
     {
         parent::__construct($io, $composer, $type);
 
-        $this->_io = $io;
-        $this->_composer = $composer;
-        $this->_type = $type;
-        $this->_config = $composer->getConfig();
+        $this->config = $this->composer->getConfig();
 
         if (!empty($config['type']) && empty($this->support)) {
             $this->support = $config['type'];
