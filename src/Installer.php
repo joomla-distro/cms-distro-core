@@ -25,6 +25,8 @@ class Installer implements PluginInterface
         $packages = array();
         // Read Composer Config
         $config = $composer->getConfig();
+        // Vendor Directory
+        $vendorDir = rtrim($composer->getConfig()->get('vendor-dir'), '/');
 
         $composer_installers = $config->get('cms-package-installer');
 
@@ -65,7 +67,13 @@ class Installer implements PluginInterface
                         continue;
                     }
                     $class_path = $vendorDir . $package['require'];
-                    require_once $class_path;
+                    echo $class_path;
+                    if (file_exists($class_path)) {
+                        require_once $class_path;
+                    } else {
+                        continue;
+                    }
+                    
                 }
 
                 $installer = new $class_name($io, $composer, $class_config);
