@@ -123,17 +123,6 @@ class BaseInstaller extends LibraryInstaller
 
         $location = preg_replace($keys,array_values($this->vars),$this->location);
 
-        $define = $this->_config->get('define');
-
-        if(is_null($define) || !is_array($define)) {
-            $define = array();
-        }
-
-        // check if exists on define the custom support-type
-        if (array_key_exists($this->support, $define)) {
-            $location = $define[$support] . '/' . $location;
-        }
-
         return $location;
     }
 }
