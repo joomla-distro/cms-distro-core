@@ -66,14 +66,12 @@ class Installer implements PluginInterface
                     if (!isset($package['require'])) {
                         continue;
                     }
-                    $class_path = $vendorDir . $package['require'];
-                    echo $class_path;
+                    $class_path = $vendorDir . '/' . $package['require'];
                     if (file_exists($class_path)) {
                         require_once $class_path;
                     } else {
                         continue;
                     }
-                    
                 }
 
                 $installer = new $class_name($io, $composer, $class_config);
